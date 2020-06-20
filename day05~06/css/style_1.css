@@ -1,0 +1,19 @@
+body{
+    font-family: "San Francisco";
+}
+p{
+    font-weight: 600;
+}
+span{
+    font-weight: 500;
+    margin-right:20px ;
+    margin-left: 10px;
+}
+
+.content p{
+    margin:   0px;
+}
+.content {
+    margin: 10px 0px 10px 0px;
+}
+
