@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head lang="zh-cn">
+        <meta charset="utf-8">
+        <title>test01</title>
+        <style>
+            html,body{
+                width: 100%;
+                box-sizing: 0;
+                margin: 0;
+                height: 100%;
+            }
+            #left{
+                background-color: blue;
+                width: calc(100%-200px);
+                height: 100%;
+                box-sizing: 0;
+                margin-right: 200px;
+                
+            }
+            #right{
+                background-color: crimson;
+                width: 200px;
+                height:100%;
+                box-sizing: 0;
+                float:right;
+                
+            }
+        </style>
+    </head>
+    <body>
+        <!-- 实现一个两栏布局，左侧占30%宽度，右侧占70%宽度 -->
+        <div id="right"></div>
+            <div id="left"></div>
+            
+       
+        
+    </body>
+</html>
