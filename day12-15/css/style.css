@@ -330,9 +330,38 @@ html,body{
     display: flex;
     flex-direction: row;
 }
-.info-content-left,.info-content-right{
-    flex: 1;
+.info-content-left{
+    flex:9;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-left:20px;
+    padding-right: 20px;
+    border-right:1px solid rgba(0, 0, 0, 0.144);
+}
+.info-left-icos{
+    display: flex;
+    flex-direction: row;
+    border-radius: 5px;
+    border:1px solid   rgba(0, 0, 0, 0.281);
+    background-image: radial-gradient(#feffff,#f3f5f8) ;
+}
+.icos{
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.icos:hover{
+    background-image: radial-gradient(#eeeeee,#cccccc)
+}
+.icos:nth-child(2){
+    border-left: 1px solid   rgba(0, 0, 0, 0.281);
+    border-right: 1px solid   rgba(0, 0, 0, 0.281);
 }
 .info-content-right{
-    
+    flex: 2;
+    padding-left: 20px;
 }
