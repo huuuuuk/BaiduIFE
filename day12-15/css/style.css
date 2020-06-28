@@ -13,6 +13,7 @@ html,body{
     float: left;
 }
 .left{
+    box-sizing: border-box;
     position: relative;
     width:100px;
     height: 100%;
@@ -75,6 +76,7 @@ html,body{
 }
 
 .middle{
+    box-sizing: border-box;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -142,7 +144,8 @@ html,body{
     position: fixed;
     bottom: 0px;
     padding: 20px 30px;
-    width:190px;
+    width:250px;
+    box-sizing: border-box;
     background-color: #222c3c;
     display: flex;
     flex-direction: column;
@@ -357,11 +360,190 @@ html,body{
 .icos:hover{
     background-image: radial-gradient(#eeeeee,#cccccc)
 }
-.icos:nth-child(2){
+.icos:nth-child(2),.icos:nth-child(3){
     border-left: 1px solid   rgba(0, 0, 0, 0.281);
-    border-right: 1px solid   rgba(0, 0, 0, 0.281);
+    
 }
 .info-content-right{
     flex: 2;
     padding-left: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+.info-right-pagemenu{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    box-sizing: border-box;
+    border: 1px solid   rgba(0, 0, 0, 0.281);
+    border-radius: 5px;
+    background-image: radial-gradient(#feffff,#f3f5f8)
+
+}
+
+.info-conversation{
+    margin-left: 400px;
+    display: flex;
+    flex-direction: column;
+    
+}
+.info-older{
+   
+    width: 100%;
+    border-bottom:1px solid rgba(0, 0, 0, 0.144) ;
+    display: flex;
+    flex-direction: column;
+    
+    align-items: center;
+    
+}
+.info-conv-card{
+    width: 100%;
+    
+    
+    display: flex;
+}
+.info-conv-img{
+    padding: 25px ;
+    
+}
+.info-mess{
+   
+   margin: 25px 0;
+    
+}
+
+.info-conv-title{
+    display: flex;
+    flex-direction: row;
+}
+.info-conv-name{
+    font-size: 1.1em;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.651);
+}
+.info-conv-time{
+    font-size: 1em;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.308);
+    margin-left: 10px;
+}
+.info-conv-content{
+    font-size: 1em;
+}
+.sign{
+    position: absolute;
+    left: calc(50% - 100px);
+    line-height: 50px;
+    background-color: white;
+    width:200px;
+    top: -25px;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.356);
+    font-size: 1em;
+}
+.info-new >.sign{
+    color: #1c92ec;
+}
+.info-old{
+    position: relative;
+    height: auto;
+    width: 100%;
+    border-bottom:1px solid #1c92ec ;
+    display: flex;
+    flex-direction: column;
+    
+    align-items: center;
+}
+.info-new{
+    position: relative;
+    height: auto;
+    width: 100%;
+    
+    display: flex;
+    flex-direction: column;
+    
+    align-items: center;
+}
+.info-mess-imgs{
+    border-radius: 5px;
+    
+    display: flex;
+
+}
+.info-mess-img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    margin:20px 20px 0 0;
+    width: 155px;
+    height: 100px;
+    
+}
+.info-mess-img:nth-child(1){
+    background-image: url(../imgs/photo1.png);
+}
+.info-mess-img:nth-child(2){
+    background-image: url(../imgs/photo2.png);
+}
+.info-masking{
+    width: 100%;
+    height: 100%;
+    visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.486);
+}
+.info-ico-check{
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.233);
+}
+
+.info-mess-img:hover .info-masking{
+    visibility: visible;
+}
+.info-conv-input{
+    position: fixed;
+    bottom: 10px;
+    background-color:white;
+    width: 100%;
+    margin-left:401px ;
+    height: 40px;
+    padding-left: calc((100% - 1260px) /2);
+    
+    box-sizing: border-box;
+    
+    
+}
+.info-conv-input form{
+    position: relative;
+    margin: 0 auto;
+    
+}
+.info-conv-input input {
+    width: 500px;
+    height: 40px;
+    padding-left: 52px;
+    border-radius: 5px;
+    border: 1px solid  rgba(0, 0, 0, 0.144) ;
+}
+.info-conv-input button {
+    width: 42px;
+    height: 43px;
+    background-image: url('../imgs/Plus.png');
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    position: absolute;
+    border:1px solid rgba(0, 0, 0, 0.144) 
+    
 }
