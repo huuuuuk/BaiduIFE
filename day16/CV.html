@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>王有臻简历</title>
+        <meta name="author" content="王有臻">
+        <meta name="version" content="1.0">
+        <style>
+            h1{
+                text-align: center;
+            }
+            img{
+                width:100px;
+                height: 100px;
+                display: none;
+            }
+            .hrefs{
+                display: none;
+            }
+            .cram,.songs{
+                display: flex;
+                flex: row;
+                align-items: center;
+                
+                
+            }
+            
+            button{
+                width: 100px;
+                height: 40px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                
+            }
+            .mycover{
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 >简历</h1>
+        <h2>个人信息</h2>
+        <p><span>姓名：</span>王宇宙 <span>性别：</span>男 <span>年龄：</span>26 <span>民族：</span>汉 <span>政治身份：</span>共青团员 <span>学历：</span>硕士研究生 <span>毕业院校：</span>重庆邮电大学 </p>
+        <button id="photo">想看我的照片吗？</button>
+        <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1592580000488&di=6f0b2ae784cc99e2d7386b6eaaf68100&imgtype=0&src=http%3A%2F%2Fwww.m1905.com%2Fuploadfile%2F2007-7%2F02160238335.jpg" alt="我的照片"  id="myphoto">
+        <h2>教育信息</h2>
+        <p><span>2009~2012</span>邯郸市第十中学</p>
+        <p><span>2012~2015</span>沧州师范学院</p>
+        <p><span>2015~2017</span>沧州师范学院</p>
+        <p><span>2017~2020</span>重庆邮电大学</p>
+        <h2>技能特长</h2>
+        <div class="cram">
+            <p>摄影</p>
+            <button id="look">看我的作品</button>
+            <img  id="mycram"src="./imgs/rain.jpg" alt="">
+        </div>
+        <div class="songs"> 
+            <p>唱歌</p>
+            <button id="listen">听我的翻唱</button>
+            <div class="mycover"id="mycover" >
+                <audio controls src="./m4a/大碗宽面.mp3"></audio>
+            </div>
+            
+            
+        </div>
+        <p>熟练使用solidity语言</p>
+        <p>区块链技术概念及应用</p>
+        <h2>项目经验</h2>
+        <h3>项目A：区块链存证系统</h3>
+        <p>以去中心化、匿名性和共识性对存证信息进行安全保护，以确保电子数据的安全性和有效性</p>
+        <p>该项目获得布比区块链全国区块链项目设计大赛第9名</p>
+        <h3>项目B: 区块链版权通证系统</h3>
+        <p>使用智能合约将作品的在线版权转化为区块链网络中的数字通证，利用区块链技术的全节点共识、可溯源、不可篡改的特性实现点对点的安全可信的版权交易。</p>
+        <h2>个人主页</h2>
+        <button id="forkme">关注我吧</button> 
+        <div class="hrefs" id="ahrefs"> 
+            <a href="weibo.com">我的微博</a>
+            <a href="bilibili.com">我的bilibili</a>
+            <a href="github.com">我的github</a>
+        </div>
+        <script>
+            document.getElementById("forkme").onclick=function(){
+                document.getElementById("ahrefs").style.display="block";
+            }
+            document.getElementById("photo").onclick=function(){
+                document.getElementById("myphoto").style.display="block";
+            }
+            document.getElementById("photo").onclick=function(){
+                document.getElementById("myphoto").style.display="block";
+            }
+            document.getElementById("photo").onclick=function(){
+                document.getElementById("myphoto").style.display="block";
+            }
+            document.getElementById("look").onclick=function(){
+                document.getElementById("look").style.display="none";
+                document.getElementById("mycram").style.display="block";
+            }
+            document.getElementById("listen").onclick=function(){
+                document.getElementById("look").style.display="none";
+                document.getElementById("mycover").style.display="block";
+            }
+        </script>
+
+    </body>
+</html>
