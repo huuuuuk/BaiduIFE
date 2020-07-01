@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">    
+    <title>IFE ECMAScript</title>
+</head>
+<body>        
+    <input id="dec-number" type="number" placeholder="输入一个十进制非负整数">
+    <input id="bin-bit" type="number" placeholder="输入转化后二进制数字位数">
+
+    <button id="trans-btn">转化为二进制</button>
+    <p id="result">运算结果</p>
+    <script>
+     num1 = document.getElementById("dec-number");
+     num2 = document.getElementById("bin-bit");
+     btn = document.getElementById("trans-btn");
+     btn.addEventListener("click",function(){
+        let number =Number(num1.value);
+        let binbit = Number(num2.value)
+        let arr =[];
+        console.log(number);
+        let result;
+        if (number<0|| number%1!==0){
+            document.getElementById("result").innerHTML="请输入一个非负整数";
+        }else{
+            for(;;){
+                arr.unshift(number%2);
+                number=Math.floor(number/2);
+                if (number<2){
+                    arr.unshift(number);
+                    break;
+                }
+            }
+        }
+        if (arr.length<binbit){
+            for(;arr.length<binbit;){
+                arr.unshift("0")
+            }
+            result=arr.join("")
+            document.getElementById("result").innerHTML="请输入数字";
+        }else{
+            alert("超出规定位数")
+            result=arr.join("");
+            document.getElementById("result").innerHTML=result;
+        }
+
+        
+     });
+
+
+
+// 实现党点击转化按钮时，将输入的十进制数字转化为二进制，并显示在result的p标签内
+// Some coding
+
+    </script>
+</body>
+</html>
