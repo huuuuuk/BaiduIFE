@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">    
+    <title>IFE ECMAScript</title>
+</head>
+<body>        
+    <div id="wrapper">
+        <div id="news-top" class="section">
+            <h3>Some title</h3>
+            <div class="content">
+                <ul>
+                    <li><span>HTML</span><a href="">Some Link1</a></li>
+                    <li><span>JS</span><a class="active" href="">Some Link2</a></li>
+                    <li><span>CSS</span><a href="">Some Link3</a></li>
+                    <li><span>JS</span><a href="">Some Link4</a></li>
+                </ul>
+            </div>
+            <img src="">
+            <p class="">Some Text</p>
+        </div>
+        <div id="news-normal" class="section">
+            <h3>Some title</h3>
+            <div class="content">
+                <ul>
+                    <li><span>HTML</span><a href="">Some Link1</a></li>
+                    <li><span>HTML</span><a href="">Some Link2</a></li>
+                    <li><span>JS</span><a class="active" href="#">Some Link3</a></li>
+                    <li><span>CSS</span><a href="">Some Link4</a></li>
+                </ul>
+            </div>
+            <img src="">
+            <p class="">Some Text</p>
+        </div>      
+    </div>
+    <script>
+    var div = document.getElementById("wrapper");
+    var btn1 = document.createElement("button");
+    var btn2 = document.createElement("button");
+    var btn3 = document.createElement("button");
+    var btn4 = document.createElement("button");
+    var p = document.querySelector("p")
+    btn1.style.width="50px";
+    btn1.style.height="50px";
+    btn1.textContent="func()1"
+    btn2.style.width="50px";
+    btn2.style.height="50px";
+    btn2.textContent="func()2"
+    btn3.style.width="50px";
+    btn3.style.height="50px";
+    btn3.textContent="func()3"
+    btn4.style.width="50px";
+    btn4.style.height="50px";
+    btn4.textContent="func()4"
+    
+    btn1.addEventListener("click",function(){
+        var spanarr =findAllHtmlSpanInOneSection("news-normal");
+        p.innerHTML=spanarr;
+    })
+    btn2.addEventListener("click",function(){
+        var liarr = getAllListItem();
+        p.innerHTML =liarr;
+    })
+    btn3.addEventListener("click",function(){
+        var liarr2 = findListItem("news-normal","CSS");
+        p.innerHTML =liarr2;
+    })
+    btn4.addEventListener("click",function(){
+        var text = getActiveLinkContent("news-normal");
+        p.innerHTML =text;
+    })
+    div.appendChild(btn1);
+    div.appendChild(btn2);
+    div.appendChild(btn3);
+    div.appendChild(btn4);
+    
+    function getAllListItem() {
+        // 返回页面中所有li标签
+        var lis = document.getElementsByTagName("li");
+        return lis
+    }
+
+    function findAllHtmlSpanInOneSection(sectionId) {
+        // 返回某个section下所有span中内容为HTML的span标签
+        var sect = document.getElementById(sectionId);
+        var spans = sect.getElementsByTagName("span");
+        var result = [];
+        for (i=0;i<spans.length;i++){
+            y=spans[i].textContent;
+           if (y === "HTML"){
+               result.push(spans[i]);
+           }
+        }
+        return result;      
+    }
+
+    function findListItem(sectionId, spanCont) {
+        // 返回某个section下，所有所包含span内容为spanCont的LI标签
+        var sect = document.getElementById(sectionId);
+        var spans = sect.getElementsByTagName("span");
+        var result = [];
+        for (i=0;i<spans.length;i++){
+            y=spans[i].textContent;
+           if (y === spanCont){
+               li =spans[i].parentElement;
+               result.push(li);
+           }
+        }
+        return result;      
+    }
+    
+
+    function getActiveLinkContent(sectionId) {
+        var sect = document.getElementById(sectionId);
+        var a = sect.getElementsByClassName("active");
+        for (i=0;i<a.length;i++){
+            text=a[i].textContent;
+            return text;
+            
+            
+            
+        }
+        
+        // 返回某个section下，class为active的链接中包含的文字内容
+    }
+
+    </script>
+</body>
+</html>
