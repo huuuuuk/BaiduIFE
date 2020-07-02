@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang = "zh-cn">
+    <head>
+        <meta charset="utf-8">
+        <title>erik's smile</title>
+        <style>
+            .erik{
+                width: 480px;
+                height: 480px;
+                background-image: url("./images/erik_ce204002.jpg");
+                background-repeat: no-repeat;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="fade-obj" class="erik"></div>
+        <button>笑一个</button>
+        <script>
+            var div = document.querySelector("div");
+            var btn = document.querySelector("button");
+            btn.addEventListener("click",game)
+            var t1;
+            var t2
+            function game(){
+                if (btn.textContent==="笑一个"){
+                    smile();
+                }else if(btn.textContent==="别笑了"){
+                    clearTimeout(t1);
+                    clearTimeout(t2);
+                    btn.textContent="笑一个";
+                }
+
+            }
+            var y = 480;
+            
+            function smile() {
+                btn.textContent="别笑了";
+                
+                div.style.backgroundPositionY="-"+String(y)+"px";
+                y+=480;
+                console.log(y)
+                t1 = setTimeout(smile,50);
+                if (y==8160){
+                    y-=480;
+                    nosmile();
+                    clearTimeout(t1);
+                    
+                }
+
+            }
+            function nosmile() {
+                
+                div.style.backgroundPositionY="-"+String(y)+"px";
+                y-=480;
+                t2 = setTimeout(nosmile,50);
+                if (y==0){
+                    smile();
+                    clearTimeout(t2);
+                }
+            }
+        </script>
+    </body>
+
+</html>
