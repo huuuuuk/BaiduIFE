@@ -83,7 +83,7 @@
         // });
 
         inputDom.addEventListener("input", function () {
-            
+
             appdLi(inputDom.value);
             visb(inputDom.value);
             // 获取用户输入，生成提示框中的提示内容，将提示内容添加到email - sug - wrapper中
@@ -93,8 +93,8 @@
         inputDom.addEventListener("keydown", function (e) {
             judge(e);
             judgeKey(e);
-            
-            
+            select(e);
+
         })
         function judge(e) {
             if (e.keyCode != 38 && e.keyCode != 40 && e.keyCode != 13) {
@@ -103,122 +103,131 @@
                 visb(inputDom.value);
             }
         }
+        function select(e) {
 
-        function judgeKey(e) {
-            appdLi(inputDom.value);
-            lis = document.querySelectorAll("li");
-            len = lis.length;
-            
-            if (len > 0) {
-                num = e.keyCode;
-                if (num == 38) {
-                    if (nowSelectTipIndex != 0) {
-                        nowSelectTipIndex -= 1;
-                    } else {
-                        nowSelectTipIndex = len - 1;
-                        
-                    }
-                    
-                }
-                if (num == 40) {
-                    
-                    if (nowSelectTipIndex != len - 1) {
-                        nowSelectTipIndex += 1;
-                       
-                    } else {
-                        nowSelectTipIndex = 0;
-                    }
-                }
-                if (num==13){
-                    inputDom.value=lis[nowSelectTipIndex].textContent;
-                    visb('');
-                }
-               
-            }
-            
-            console.log(nowSelectTipIndex);
-            
-            appdLi(inputDom.value);
-        }
-
-
-        function trimInput(str) {
-            return str.trim();
-        }
-
-        function createOutput(str) {
-            var str1 = trimInput(str);
-            var str2;
-            var strs = [];
-            
-            if (str1.indexOf("@") !== -1) {
-                str2 = str1.split("@")[1];
+            if (e.keyCode == 27) {
                 
-                str1 = str1.split("@")[0];
+               
+                    inputDom.select();
+                
+            }
+        }
 
-                if (str2 !== "" && str2 != undefined) {
-                    flag = true;
-                    for (x in postfixList) {
+            function judgeKey(e) {
+                appdLi(inputDom.value);
+                lis = document.querySelectorAll("li");
+                len = lis.length;
 
-                        if (postfixList[x].startsWith(str2)) {
-                            strs.push(str1 + "@" + postfixList[x]);
-                            flag = false;
+                if (len > 0) {
+                    num = e.keyCode;
+                    if (num == 38) {
+                        if (nowSelectTipIndex != 0) {
+                            nowSelectTipIndex -= 1;
+                        } else {
+                            nowSelectTipIndex = len - 1;
+
+                        }
+
+                    }
+                    if (num == 40) {
+
+                        if (nowSelectTipIndex != len - 1) {
+                            nowSelectTipIndex += 1;
+
+                        } else {
+                            nowSelectTipIndex = 0;
                         }
                     }
-                    if (flag) {
+                    if (num == 13) {
+                        inputDom.value = lis[nowSelectTipIndex].textContent;
+                        visb('');
+                    }
+
+                }
+
+                console.log(nowSelectTipIndex);
+
+                appdLi(inputDom.value);
+            }
+
+
+            function trimInput(str) {
+                return str.trim();
+            }
+
+            function createOutput(str) {
+                var str1 = trimInput(str);
+                var str2;
+                var strs = [];
+
+                if (str1.indexOf("@") !== -1) {
+                    str2 = str1.split("@")[1];
+
+                    str1 = str1.split("@")[0];
+
+                    if (str2 !== "" && str2 != undefined) {
+                        flag = true;
+                        for (x in postfixList) {
+
+                            if (postfixList[x].startsWith(str2)) {
+                                strs.push(str1 + "@" + postfixList[x]);
+                                flag = false;
+                            }
+                        }
+                        if (flag) {
+                            for (x in postfixList) {
+                                strs.push(str1 + "@" + postfixList[x]);
+
+                            }
+                        }
+                    } else {
                         for (x in postfixList) {
                             strs.push(str1 + "@" + postfixList[x]);
 
                         }
                     }
                 } else {
+
                     for (x in postfixList) {
                         strs.push(str1 + "@" + postfixList[x]);
-
                     }
                 }
-            } else {
-                
-                for (x in postfixList) {
-                    strs.push(str1 + "@" + postfixList[x]);
+
+
+                return strs;
+            }
+
+            function appdLi(str) {
+                var list = createOutput(str);
+                //获取生成提示框中的提示内容
+                ulDom.innerHTML = "";
+                for (x in list) {
+                    var li = document.createElement('li');
+                    li.textContent = list[x];
+                    ulDom.appendChild(li);
+                    if (x == nowSelectTipIndex) {
+                        li.style.backgroundColor = "rgba(101, 252, 252, 0.829)";
+                    }
+                }
+                //将内容添加到email - sug - wrapper中
+            }
+
+            function visb(str) {
+                str1 = trimInput(str);
+                if (str == undefined || str1 == "") {
+                    off();
+                } else {
+                    on();
                 }
             }
 
-
-            return strs;
-        }
-
-        function appdLi(str) {
-            var list = createOutput(str);
-            //获取生成提示框中的提示内容
-            ulDom.innerHTML = "";
-            for (x in list) {
-                var li = document.createElement('li');
-                li.textContent = list[x];
-                ulDom.appendChild(li);
-                if (x == nowSelectTipIndex) {
-                    li.style.backgroundColor = "rgba(101, 252, 252, 0.829)";
-                }
+            function off() {
+                ulDom.style.display = "none";
             }
-            //将内容添加到email - sug - wrapper中
-        }
 
-        function visb(str) {
-            str1 = trimInput(str);
-            if (str == undefined || str1 == "") {
-                off();
-            } else {
-                on();
+            function on() {
+                ulDom.style.display = "";
             }
-        }
-
-        function off() {
-            ulDom.style.display = "none";
-        }
-
-        function on() {
-            ulDom.style.display = "";
-        }
     </script>
 </body>
 
