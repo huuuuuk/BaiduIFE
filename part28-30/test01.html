@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="cn-zh">
+
+<head>
+    <meta charset="utf-8">
+    <title>事件委托测试</title>
+</head>
+<body>
+    <div id ="main">
+        <div>
+            1
+        </div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+    </div>
+    <p>无论点击哪个标签，都会使得该标签的背景颜色变成黑色</p>
+    <script>
+        var main =document.querySelector("div");
+        main.addEventListener("click",function(e){
+            e.target.style.backgroundColor="black";
+        })
+    </script>
+</body>
+</html>

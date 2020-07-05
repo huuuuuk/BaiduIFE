@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="cn-zh">
+
+<head>
+    <meta charset="utf-8">
+    <title>邮箱输入提示</title>
+    <style>
+        html,
+        body,
+        div {
+            margin: 0;
+            padding: 0;
+        }
+
+        .wrapper {
+            position: relative;
+            top: 100px;
+            left: 11px;
+        }
+
+        li {
+            box-sizing: border-box;
+            list-style: none;
+            width: 150px;
+            height: 30px;
+            padding-left: 20px;
+        }
+
+        input {
+            height: 30px;
+            width: 150px;
+            padding-left: 20px;
+            box-sizing: border-box;
+        }
+
+        li:hover {
+            background-color: rgba(101, 252, 252, 0.829);
+
+        }
+
+        ul {
+            position: absolute;
+            left: 0;
+            top: 30px;
+            margin: 0;
+            padding-left: 0px;
+            color: rgba(0, 0, 0, 0.466);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <input id="email-input" type="text">
+        <ul id="email-sug-wrapper" class="email-sug"></ul>
+    </div>
+    <script>
+        var inputDom = document.querySelector("#email-input");
+        var ulDom = document.querySelector("#email-sug-wrapper");
+        var postfixList = ['163.com', 'gmail.com', '126.com', 'qq.com', '263.net'];
+        var nowSelectTipIndex = 0;
+        ulDom.addEventListener("click", function (e) {
+            var src = e.target;
+
+            inputDom.value = src.textContent;
+            visb("");
+        })
+        // 当用户没有任何输入时，提示框消失
+        // 当用户输入字符后，显示提示框，并且把用户输入的内容自动拼上邮箱后缀进行显示
+        // 暂时不用考虑示意图中的红色和蓝色背景色的逻辑
+        // 注意用户输入中前后空格需要去除
+        // inp.addEventListener('keyup',function(){
+        //     console.log('event keyup')
+        // });
+        // inp.addEventListener('keypress',function(){
+        //     console.log('event keyress')
+        // });
+        // inp.addEventListener('keydown',function(){
+        //     console.log('event keydown')
+        // });
+        // inp.addEventListener('input',function(){
+        //     console.log('event oninput')
+        // });
+
+        inputDom.addEventListener("input", function () {
+            
+            appdLi(inputDom.value);
+            visb(inputDom.value);
+            // 获取用户输入，生成提示框中的提示内容，将提示内容添加到email - sug - wrapper中
+            // 控制email - sug - wrapper的显示 / 隐藏状态
+
+        })
+        inputDom.addEventListener("keydown", function (e) {
+            judge(e);
+            judgeKey(e);
+            
+            
+        })
+        function judge(e) {
+            if (e.keyCode != 38 && e.keyCode != 40 && e.keyCode != 13) {
+                nowSelectTipIndex = 0;
+                appdLi(inputDom.value);
+                visb(inputDom.value);
+            }
+        }
+
+        function judgeKey(e) {
+            appdLi(inputDom.value);
+            lis = document.querySelectorAll("li");
+            len = lis.length;
+            
+            if (len > 0) {
+                num = e.keyCode;
+                if (num == 38) {
+                    if (nowSelectTipIndex != 0) {
+                        nowSelectTipIndex -= 1;
+                    } else {
+                        nowSelectTipIndex = len - 1;
+                        
+                    }
+                    
+                }
+                if (num == 40) {
+                    
+                    if (nowSelectTipIndex != len - 1) {
+                        nowSelectTipIndex += 1;
+                       
+                    } else {
+                        nowSelectTipIndex = 0;
+                    }
+                }
+                if (num==13){
+                    inputDom.value=lis[nowSelectTipIndex].textContent;
+                    visb('');
+                }
+               
+            }
+            
+            console.log(nowSelectTipIndex);
+            
+            appdLi(inputDom.value);
+        }
+
+
+        function trimInput(str) {
+            return str.trim();
+        }
+
+        function createOutput(str) {
+            var str1 = trimInput(str);
+            var str2;
+            var strs = [];
+            
+            if (str1.indexOf("@") !== -1) {
+                str2 = str1.split("@")[1];
+                
+                str1 = str1.split("@")[0];
+
+                if (str2 !== "" && str2 != undefined) {
+                    flag = true;
+                    for (x in postfixList) {
+
+                        if (postfixList[x].startsWith(str2)) {
+                            strs.push(str1 + "@" + postfixList[x]);
+                            flag = false;
+                        }
+                    }
+                    if (flag) {
+                        for (x in postfixList) {
+                            strs.push(str1 + "@" + postfixList[x]);
+
+                        }
+                    }
+                } else {
+                    for (x in postfixList) {
+                        strs.push(str1 + "@" + postfixList[x]);
+
+                    }
+                }
+            } else {
+                
+                for (x in postfixList) {
+                    strs.push(str1 + "@" + postfixList[x]);
+                }
+            }
+
+
+            return strs;
+        }
+
+        function appdLi(str) {
+            var list = createOutput(str);
+            //获取生成提示框中的提示内容
+            ulDom.innerHTML = "";
+            for (x in list) {
+                var li = document.createElement('li');
+                li.textContent = list[x];
+                ulDom.appendChild(li);
+                if (x == nowSelectTipIndex) {
+                    li.style.backgroundColor = "rgba(101, 252, 252, 0.829)";
+                }
+            }
+            //将内容添加到email - sug - wrapper中
+        }
+
+        function visb(str) {
+            str1 = trimInput(str);
+            if (str == undefined || str1 == "") {
+                off();
+            } else {
+                on();
+            }
+        }
+
+        function off() {
+            ulDom.style.display = "none";
+        }
+
+        function on() {
+            ulDom.style.display = "";
+        }
+    </script>
+</body>
+
+</html>
