@@ -7,8 +7,9 @@ function createTable(selectDateArr) {
     let products = selectDateArr[1];
     let arr = getDatas(regions, products);
     let newTable = document.createElement("table");
-    let newth = newTable.createTHead();
-    let thRow = newth.insertRow(0);
+    let newTb = newTable.createTBody();
+    
+    let thRow = newTb.insertRow(0);
     let flaginCreateTable;
     (regions.length < products.length) ? flaginCreateTable = true : flaginCreateTable = false;
     if (flaginCreateTable) {
@@ -29,7 +30,7 @@ function createTable(selectDateArr) {
 
     }
     // console.log(arr);
-    let newTb = newTable.createTBody();
+    
     for (line in arr) {
         // console.log(arr[line]);
         let newTr = newTb.insertRow();
@@ -37,9 +38,9 @@ function createTable(selectDateArr) {
             console.log(flaginCreateTable);
             for (x in arr[line]) {
                 if (x == "region") {
-                    let cell = newTr.insertCell(0);
-                    if (line ==0 ||(line+1)% products.length == 0) {
-                        
+                    
+                    if (line ==0 ||(line)% products.length == 0) {
+                        let cell = newTr.insertCell(0);
                         cell.innerHTML = arr[line][x];
                         cell.rowSpan = products.length;
                         console.log(products.length)
@@ -58,9 +59,9 @@ function createTable(selectDateArr) {
         } else {
             for (x in arr[line]) {
                 if (x == "product") {
-                    let cell = newTr.insertCell(0);
-                    if (line  ==0 ||(line+1)% regions.length == 0) {
-                        
+                    
+                    if (line  ==0 ||(line)% regions.length == 0) {
+                        let cell = newTr.insertCell(0);
                         cell.innerHTML = arr[line][x];
                         cell.rowSpan=regions.length;
                     }
